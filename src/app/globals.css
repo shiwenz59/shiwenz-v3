@@ -12,8 +12,35 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.page-frame {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.card-frame {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 3.5 / 2;
+  width: min(80vw, 140vh);
 }

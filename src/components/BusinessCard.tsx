@@ -1,6 +1,7 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import TiltedCard from './TiltedCard';
 import VariableProximity from './VariableProximity';
 import GlassIcons, { type GlassIconsItem } from './GlassIcons';
@@ -15,7 +16,7 @@ const IconOne = () => (
 
 const IconTwo = () => (
   <svg viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 .5C5.73.5.75 5.48.75 11.75c0 4.94 3.2 9.13 7.63 10.6.56.1.77-.24.77-.54v-2.1c-3.1.67-3.75-1.3-3.75-1.3-.5-1.28-1.23-1.63-1.23-1.63-1-.69.08-.67.08-.67 1.1.08 1.68 1.13 1.68 1.13.99 1.7 2.6 1.2 3.24.92.1-.72.39-1.2.7-1.48-2.48-.28-5.08-1.24-5.08-5.52 0-1.22.44-2.22 1.15-3-.12-.28-.5-1.42.11-2.96 0 0 .94-.3 3.07 1.15a10.6 10.6 0 0 1 5.58 0c2.13-1.45 3.07-1.15 3.07-1.15.61 1.54.23 2.68.11 2.96.72.78 1.15 1.78 1.15 3 0 4.29-2.6 5.23-5.1 5.5.4.35.76 1.03.76 2.08v3.08c0 .3.2.65.78.54a11.27 11.27 0 0 0 7.62-10.6C23.25 5.48 18.27.5 12 .5Z" />
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" />
   </svg>
 );
 
@@ -27,11 +28,35 @@ const IconThree = () => (
 
 export default function BusinessCard() {
   const roleRef = useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = useState(false);
+
+  const email = ['shiwenz59', 'icloud.com'].join('@');
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   const icons: GlassIconsItem[] = [
-    { icon: <IconOne />, color: 'blue', label: 'Link 1' },
-    { icon: <IconTwo />, color: 'purple', label: 'Link 2' },
-    { icon: <IconThree />, color: 'indigo', label: 'Link 3' },
+    {
+      icon: <IconTwo />,
+      color: 'purple',
+      label: 'Instagram',
+      href: 'https://www.instagram.com/zhushiwen0703/',
+    },
+    {
+      icon: <IconThree />,
+      color: 'indigo',
+      label: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/shiwen-zhu-b38095268',
+    },
+    {
+      icon: <IconOne />,
+      color: 'blue',
+      label: 'Email',
+      onClick: handleCopyEmail,
+    },
   ];
 
   return (
@@ -69,6 +94,19 @@ export default function BusinessCard() {
             </div>
             <div className="card-actions">
               <GlassIcons items={icons} />
+              <AnimatePresence>
+                {copied && (
+                  <motion.span
+                    className="email-toast"
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 6 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    Copied!
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>

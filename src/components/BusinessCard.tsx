@@ -85,7 +85,7 @@ export default function BusinessCard() {
             <div className="card-role" ref={roleRef}>
               <VariableProximity
                 segments={[
-                  { text: 'product manager', href: '/resume.pdf' },
+                  { text: 'product manager', href: '/resume' },
                   { text: ' | ' },
                   { text: 'art historian', href: 'https://www.instagram.com/nyufas/' },
                   { text: ' | ' },

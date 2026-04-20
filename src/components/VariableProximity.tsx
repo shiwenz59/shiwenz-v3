@@ -45,7 +45,7 @@ function useAnimationFrame(callback: () => void) {
 }
 
 function useMousePositionRef(containerRef: RefObject<HTMLElement | null>) {
-  const positionRef = useRef({ x: 0, y: 0 });
+  const positionRef = useRef({ x: -9999, y: -9999 });
 
   useEffect(() => {
     const updatePosition = (x: number, y: number) => {

@@ -60,8 +60,8 @@ export default function BusinessCard() {
             <div className="card-role" ref={roleRef}>
               <VariableProximity
                 label="product manager | art historian | builder | singer-songwriter | tech reviewer | photographer"
-                fromFontVariationSettings="'wght' 400, 'opsz' 9"
-                toFontVariationSettings="'wght' 1000, 'opsz' 40"
+                fromFontVariationSettings="'wght' 300"
+                toFontVariationSettings="'wght' 700"
                 containerRef={roleRef}
                 radius={30}
                 falloff="gaussian"

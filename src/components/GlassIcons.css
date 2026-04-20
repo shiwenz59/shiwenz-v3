@@ -76,13 +76,21 @@
   display: none;
 }
 
-.icon-btn:focus-visible .icon-btn__back,
-.icon-btn:hover .icon-btn__back {
+.icon-btn:focus-visible .icon-btn__back {
   transform: rotate(25deg) translate3d(-0.4em, -0.4em, 0.5em);
 }
 
-.icon-btn:focus-visible .icon-btn__front,
-.icon-btn:hover .icon-btn__front {
+.icon-btn:focus-visible .icon-btn__front {
   transform: translate3d(0, 0, 2em);
+}
+
+@media (hover: hover) {
+  .icon-btn:hover .icon-btn__back {
+    transform: rotate(25deg) translate3d(-0.4em, -0.4em, 0.5em);
+  }
+
+  .icon-btn:hover .icon-btn__front {
+    transform: translate3d(0, 0, 2em);
+  }
 }
 

@@ -62,12 +62,19 @@ function useMousePositionRef(containerRef: RefObject<HTMLElement | null>) {
       const touch = ev.touches[0];
       if (touch) updatePosition(touch.clientX, touch.clientY);
     };
+    const handleTouchEnd = () => {
+      positionRef.current = { x: -9999, y: -9999 };
+    };
 
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener('touchcancel', handleTouchEnd);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+      window.removeEventListener('touchcancel', handleTouchEnd);
     };
   }, [containerRef]);
 

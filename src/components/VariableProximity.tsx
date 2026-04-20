@@ -14,8 +14,14 @@ import './VariableProximity.css';
 
 type Falloff = 'linear' | 'exponential' | 'gaussian';
 
+export type Segment = {
+  text: string;
+  href?: string;
+};
+
 type VariableProximityProps = {
-  label: string;
+  label?: string;
+  segments?: Segment[];
   fromFontVariationSettings: string;
   toFontVariationSettings: string;
   containerRef: RefObject<HTMLElement | null>;
@@ -72,6 +78,7 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(
   function VariableProximity(props, ref) {
     const {
       label,
+      segments,
       fromFontVariationSettings,
       toFontVariationSettings,
       containerRef,
@@ -81,6 +88,9 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(
       onClick,
       style,
     } = props;
+
+    const resolvedSegments: Segment[] = segments ?? (label ? [{ text: label }] : []);
+    const fullLabel = resolvedSegments.map((s) => s.text).join('');
 
     const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
     const interpolatedSettingsRef = useRef<string[]>([]);
@@ -164,7 +174,6 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(
       });
     });
 
-    const words = label.split(' ');
     let letterIndex = 0;
 
     return (
@@ -174,30 +183,50 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(
         onClick={onClick}
         style={{ display: 'inline', ...style }}
       >
-        {words.map((word, wordIndex) => (
-          <span key={wordIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
-            {word.split('').map((letter) => {
-              const currentLetterIndex = letterIndex++;
-              return (
-                <motion.span
-                  key={currentLetterIndex}
-                  ref={(el) => {
-                    letterRefs.current[currentLetterIndex] = el;
-                  }}
-                  style={{
-                    display: 'inline-block',
-                    fontVariationSettings: interpolatedSettingsRef.current[currentLetterIndex],
-                  }}
-                  aria-hidden="true"
-                >
-                  {letter}
-                </motion.span>
-              );
-            })}
-            {wordIndex < words.length - 1 && <span style={{ display: 'inline-block' }}>&nbsp;</span>}
-          </span>
-        ))}
-        <span className="sr-only">{label}</span>
+        {resolvedSegments.map((segment, segIndex) => {
+          const words = segment.text.split(' ');
+          const content = words.map((word, wordIndex) => (
+            <span key={wordIndex} style={{ display: 'inline-block', whiteSpace: 'nowrap' }}>
+              {word.split('').map((letter) => {
+                const currentLetterIndex = letterIndex++;
+                return (
+                  <motion.span
+                    key={currentLetterIndex}
+                    ref={(el) => {
+                      letterRefs.current[currentLetterIndex] = el;
+                    }}
+                    style={{
+                      display: 'inline-block',
+                      fontVariationSettings: interpolatedSettingsRef.current[currentLetterIndex],
+                    }}
+                    aria-hidden="true"
+                  >
+                    {letter}
+                  </motion.span>
+                );
+              })}
+              {wordIndex < words.length - 1 && (
+                <span style={{ display: 'inline-block' }}>&nbsp;</span>
+              )}
+            </span>
+          ));
+
+          if (segment.href) {
+            return (
+              <a
+                key={segIndex}
+                href={segment.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="role-link"
+              >
+                {content}
+              </a>
+            );
+          }
+          return <span key={segIndex}>{content}</span>;
+        })}
+        <span className="sr-only">{fullLabel}</span>
       </span>
     );
   },

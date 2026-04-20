@@ -84,7 +84,19 @@ export default function BusinessCard() {
             </h1>
             <div className="card-role" ref={roleRef}>
               <VariableProximity
-                label="product manager | art historian | builder | singer-songwriter | tech reviewer | photographer"
+                segments={[
+                  { text: 'product manager', href: '/resume.pdf' },
+                  { text: ' | ' },
+                  { text: 'art historian', href: 'https://www.instagram.com/nyufas/' },
+                  { text: ' | ' },
+                  { text: 'builder', href: 'https://github.com/shiwenz59' },
+                  { text: ' | ' },
+                  { text: 'singer-songwriter', href: 'https://www.driftercorp.com' },
+                  { text: ' | ' },
+                  { text: 'tech reviewer', href: 'https://www.youtube.com/@shiwenzhu7989' },
+                  { text: ' | ' },
+                  { text: 'photographer', href: 'https://www.instagram.com/shiwenpicturethat/' },
+                ]}
                 fromFontVariationSettings="'wght' 300"
                 toFontVariationSettings="'wght' 700"
                 containerRef={roleRef}

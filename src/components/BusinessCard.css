@@ -61,6 +61,12 @@
   font-variation-settings: 'wght' 400;
 }
 
+.role-link {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .card-actions {
   padding-top: 1.6cqi;
   font-size: 2.4cqi;

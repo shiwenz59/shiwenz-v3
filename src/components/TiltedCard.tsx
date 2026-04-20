@@ -91,6 +91,38 @@ export default function TiltedCard({
     rotateFigcaption.set(0);
   }
 
+  function handleTouchMove(e: React.TouchEvent<HTMLElement>) {
+    if (!ref.current) return;
+    const touch = e.touches[0];
+    if (!touch) return;
+
+    const rect = ref.current.getBoundingClientRect();
+    const offsetX = touch.clientX - rect.left - rect.width / 2;
+    const offsetY = touch.clientY - rect.top - rect.height / 2;
+
+    rotateX.set((offsetY / (rect.height / 2)) * -rotateAmplitude);
+    rotateY.set((offsetX / (rect.width / 2)) * rotateAmplitude);
+
+    x.set(touch.clientX - rect.left);
+    y.set(touch.clientY - rect.top);
+
+    rotateFigcaption.set(-(offsetY - lastY) * 0.6);
+    setLastY(offsetY);
+  }
+
+  function handleTouchStart() {
+    scale.set(scaleOnHover);
+    opacity.set(1);
+  }
+
+  function handleTouchEnd() {
+    opacity.set(0);
+    scale.set(1);
+    rotateX.set(0);
+    rotateY.set(0);
+    rotateFigcaption.set(0);
+  }
+
   return (
     <figure
       ref={ref}
@@ -99,6 +131,9 @@ export default function TiltedCard({
       onMouseMove={handleMouse}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {showMobileWarning && (
         <div className="tilted-card-mobile-alert">

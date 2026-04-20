@@ -63,7 +63,7 @@ export default function BusinessCard() {
                 fromFontVariationSettings="'wght' 400, 'opsz' 9"
                 toFontVariationSettings="'wght' 1000, 'opsz' 40"
                 containerRef={roleRef}
-                radius={90}
+                radius={30}
                 falloff="gaussian"
               />
             </div>

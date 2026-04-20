@@ -28,9 +28,23 @@
 
 .tilted-card-inner {
   position: relative;
-  transform-style: preserve-3d;
   background: #ffffff;
+  border-radius: 4px;
+  overflow: hidden;
   box-shadow: 0 30px 60px -25px rgba(0, 0, 0, 0.45), 0 10px 20px -10px rgba(0, 0, 0, 0.25);
+}
+
+.tilted-card-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  border-radius: inherit;
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='250' height='250'><filter id='paper'><feTurbulence type='fractalNoise' baseFrequency='0.4' numOctaves='6' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='250' height='250' filter='url(%23paper)'/></svg>");
+  background-size: 250px 250px;
 }
 
 .tilted-card-img {

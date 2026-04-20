@@ -42,5 +42,7 @@ body {
   position: relative;
   z-index: 1;
   aspect-ratio: 3.5 / 2;
-  width: min(80vw, 140vh);
+  width: min(70vw, 122.5vh);
+  container-type: size;
+  container-name: card;
 }

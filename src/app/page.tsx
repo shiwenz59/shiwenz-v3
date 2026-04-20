@@ -1,5 +1,5 @@
+import BusinessCard from "@/components/BusinessCard";
 import Grainient from "@/components/Grainient";
-import TiltedCard from "@/components/TiltedCard";
 
 export default function Home() {
   return (
@@ -31,16 +31,7 @@ export default function Home() {
         />
       </div>
       <div className="card-frame">
-        <TiltedCard
-          containerWidth="100%"
-          containerHeight="100%"
-          imageWidth="100%"
-          imageHeight="100%"
-          rotateAmplitude={6}
-          scaleOnHover={1.03}
-          showMobileWarning={false}
-          showTooltip={false}
-        />
+        <BusinessCard />
       </div>
     </main>
   );

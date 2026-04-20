@@ -21,9 +21,9 @@ type TiltedCardProps = {
 };
 
 const springValues = {
-  damping: 40,
-  stiffness: 60,
-  mass: 3,
+  damping: 25,
+  stiffness: 180,
+  mass: 1,
 };
 
 export default function TiltedCard({

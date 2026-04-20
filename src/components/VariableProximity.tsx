@@ -100,7 +100,6 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(
     const fullLabel = resolvedSegments.map((s) => s.text).join('');
 
     const letterRefs = useRef<(HTMLSpanElement | null)[]>([]);
-    const interpolatedSettingsRef = useRef<string[]>([]);
     const mousePositionRef = useMousePositionRef(containerRef);
     const lastPositionRef = useRef<{ x: number | null; y: number | null }>({ x: null, y: null });
 
@@ -149,7 +148,7 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(
       if (lastPositionRef.current.x === x && lastPositionRef.current.y === y) return;
       lastPositionRef.current = { x, y };
 
-      letterRefs.current.forEach((letterRef, index) => {
+      letterRefs.current.forEach((letterRef) => {
         if (!letterRef) return;
 
         const rect = letterRef.getBoundingClientRect();
@@ -169,15 +168,12 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(
         }
 
         const falloffValue = calculateFalloff(distance);
-        const newSettings = parsedSettings
+        letterRef.style.fontVariationSettings = parsedSettings
           .map(({ axis, fromValue, toValue }) => {
             const interpolatedValue = fromValue + (toValue - fromValue) * falloffValue;
             return `'${axis}' ${interpolatedValue}`;
           })
           .join(', ');
-
-        interpolatedSettingsRef.current[index] = newSettings;
-        letterRef.style.fontVariationSettings = newSettings;
       });
     });
 
@@ -204,7 +200,7 @@ const VariableProximity = forwardRef<HTMLSpanElement, VariableProximityProps>(
                     }}
                     style={{
                       display: 'inline-block',
-                      fontVariationSettings: interpolatedSettingsRef.current[currentLetterIndex],
+                      fontVariationSettings: fromFontVariationSettings,
                     }}
                     aria-hidden="true"
                   >

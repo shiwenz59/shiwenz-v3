@@ -50,8 +50,6 @@
   height: 100%;
   z-index: 2;
   will-change: transform;
-  transform: translateZ(20px);
-  transform-style: preserve-3d;
 }
 
 .tilted-card-caption {

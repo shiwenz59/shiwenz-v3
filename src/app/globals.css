@@ -46,3 +46,17 @@ body {
   container-type: size;
   container-name: card;
 }
+
+@media (max-width: 768px) and (orientation: portrait) {
+  body {
+    overflow: visible;
+  }
+
+  .card-frame {
+    /* After rotate(90deg): visual width = CSS height, visual height = CSS width.
+       Target ~90 % of screen width visually → CSS height = 90vw → CSS width = 90vw × (3.5/2) = 157.5vw.
+       Cap at 85vh so the card never overflows vertically. */
+    width: min(157.5vw, 85vh);
+    transform: rotate(90deg);
+  }
+}

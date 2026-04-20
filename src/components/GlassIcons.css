@@ -11,8 +11,6 @@
   position: relative;
   width: 3em;
   height: 3em;
-  perspective: 24em;
-  transform-style: preserve-3d;
   -webkit-tap-highlight-color: transparent;
   border: none;
   cursor: pointer;
@@ -81,7 +79,7 @@
 }
 
 .icon-btn:focus-visible .icon-btn__front {
-  transform: translate3d(0, 0, 2em);
+  transform: scale(1.08) translateY(-0.1em);
 }
 
 @media (hover: hover) {
@@ -90,7 +88,7 @@
   }
 
   .icon-btn:hover .icon-btn__front {
-    transform: translate3d(0, 0, 2em);
+    transform: scale(1.08) translateY(-0.1em);
   }
 }
 

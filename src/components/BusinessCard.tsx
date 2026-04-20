@@ -40,7 +40,7 @@ export default function BusinessCard() {
       containerHeight="100%"
       imageWidth="100%"
       imageHeight="100%"
-      rotateAmplitude={6}
+      rotateAmplitude={3}
       scaleOnHover={1.03}
       showMobileWarning={false}
       showTooltip={false}

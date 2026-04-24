@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="page-frame">
       <div className="page-background">
-        <Grainient />
+        <Grainient grainAmount={0} />
       </div>
       <div className="card-frame">
         <BusinessCard />

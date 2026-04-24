@@ -17,6 +17,9 @@
   background: #cfdcff;
   justify-self: start;
   align-self: start;
+  box-shadow:
+    0 0 0 1px hsla(0, 0%, 100%, 0.5) inset,
+    0 8px 24px -10px rgba(0, 0, 0, 0.25);
 }
 
 .card-right {
@@ -73,7 +76,7 @@
   box-shadow: 0 0 0 0.08em hsla(0, 0%, 100%, 0.4) inset;
   backdrop-filter: blur(0.75em);
   -webkit-backdrop-filter: blur(0.75em);
-  border-radius: 0.9em;
+  border-radius: 999px;
   padding: 0.3em 0.75em;
   font-size: 0.85em;
   color: #111;
